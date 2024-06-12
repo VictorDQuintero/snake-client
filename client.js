@@ -1,6 +1,6 @@
 const net = require("net");
 
-const connect = function () {
+const connect = function() {
   const conn = net.createConnection({
     host: "localhost", // IP address here,
     port: 50541, // PORT number here,
@@ -13,13 +13,6 @@ const connect = function () {
   conn.on("connect", () => {
     conn.write("Name: VDQ");
   });
-
-  // conn.on("connect", () => {
-  //   setInterval(() => {
-  //     conn.write("Move: up");
-  //   }),
-  //     50;
-  // });
 
   // interpret incoming data as text
   conn.setEncoding("utf8");
