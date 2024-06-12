@@ -2,7 +2,7 @@
 let connection; // outermost-scope:global scope
 // setupInput() places a reference to that object in another variable connection which is in a global scope of that module
 
-const setupInput = function(conn) {
+const setupInput = function (conn) {
   connection = conn;
   const stdin = process.stdin; // create variable to hold the stdin object so we don't have to type process.stdin multiple times
   stdin.setRawMode(true); // Raw Mode allows us to listen for individual keypresses instead of waiting for the user to press enter
@@ -14,7 +14,7 @@ const setupInput = function(conn) {
   return stdin; // return the stdin object so we can use it elsewhere in the program
 };
 
-const handleUserInput = function(key) {
+const handleUserInput = function (key) {
   // code handling the key presses
 
   if (key === "w") {
@@ -30,6 +30,16 @@ const handleUserInput = function(key) {
 
   if (key === "d") {
     connection.write("Move: right");
+  }
+
+  if (key === "l") {
+    connection.write("Say: LOL");
+  }
+  if (key === "g") {
+    connection.write("Say: Gotcha!");
+  }
+  if (key === "n") {
+    connection.write("Say: Noooo!");
   }
 
   // if user presses CTRL + C, then the program terminates
