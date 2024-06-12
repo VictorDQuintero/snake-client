@@ -1,6 +1,9 @@
 // setup interface to handle user input from stdin
+let connection; // outermost-scope:global scope
+// setupInput() places a reference to that object in another variable connection which is in a global scope of that module
 
-const setupInput = function () {
+const setupInput = function(conn) {
+  connection = conn;
   const stdin = process.stdin; // create variable to hold the stdin object so we don't have to type process.stdin multiple times
   stdin.setRawMode(true); // Raw Mode allows us to listen for individual keypresses instead of waiting for the user to press enter
   stdin.setEncoding("utf8"); // utf8 encoding is set so that we can read the text data that is input
@@ -11,8 +14,23 @@ const setupInput = function () {
   return stdin; // return the stdin object so we can use it elsewhere in the program
 };
 
-const handleUserInput = function (key) {
+const handleUserInput = function(key) {
   // code handling the key presses
+
+  if (key === "w") {
+    connection.write("Move: up"); // connection object can be used here because it is in global scope
+  }
+  if (key === "a") {
+    connection.write("Move: left");
+  }
+
+  if (key === "s") {
+    connection.write("Move: down");
+  }
+
+  if (key === "d") {
+    connection.write("Move: right");
+  }
 
   // if user presses CTRL + C, then the program terminates
   if (key === "\u0003") {
