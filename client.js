@@ -1,4 +1,5 @@
 const net = require("net");
+
 const connect = function () {
   const conn = net.createConnection({
     host: "localhost", // IP address here,
@@ -9,21 +10,16 @@ const connect = function () {
     console.log("Succesfully connected to game server");
   });
 
-  // set the encoding on standard in
-  process.stdin.setEncoding("utf-8");
-
-  // listen for information coming from standard in (terminal)
-  process.stdin.on("data", (data) => {
-    console.log("Name: ", data);
-
-    // send the information to the server
-    conn.write(data);
-    // conn.on("data", () => { hard coded move up
-    //   setInterval(() => {
-    //     conn.write("Move: down");
-    //   }, 50);
-    // });
+  conn.on("connect", () => {
+    conn.write("Name: VDQ");
   });
+
+  // conn.on("connect", () => {
+  //   setInterval(() => {
+  //     conn.write("Move: up");
+  //   }),
+  //     50;
+  // });
 
   // interpret incoming data as text
   conn.setEncoding("utf8");
