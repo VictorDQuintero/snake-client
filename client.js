@@ -18,6 +18,11 @@ const connect = function () {
 
     // send the information to the server
     conn.write(data);
+    // conn.on("data", () => { hard coded move up
+    //   setInterval(() => {
+    //     conn.write("Move: down");
+    //   }, 50);
+    // });
   });
 
   // interpret incoming data as text
