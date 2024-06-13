@@ -1,6 +1,7 @@
 // setup interface to handle user input from stdin
 let connection; // outermost-scope:global scope
 // setupInput() places a reference to that object in another variable connection which is in a global scope of that module
+const { MOVE_KEYS, MESSAGES } = require("./constants");
 
 const setupInput = function (conn) {
   connection = conn;
@@ -17,6 +18,27 @@ const setupInput = function (conn) {
 const handleUserInput = function (key) {
   // code handling the key presses
 
+  // for (const mover in MOVE_KEYS) {
+  //   if (key === MOVE_KEYS[mover][0]) {
+  //     connection.write(MOVE_KEYS[mover][1]);
+  //     break;
+  //   }
+  // }
+
+  // for (const mover in MOVE_KEYS) {
+  //   if (key === MOVE_KEYS[mover].letter) {
+  //     connection.write(MOVE_KEYS[mover].command);
+  //   }
+  // }
+  connection.write(MOVE_KEYS[key]);
+
+  for (const talker in MESSAGES) {
+    if (key === MESSAGES[talker].letter) {
+      connection.write(MESSAGES[talker].message);
+    }
+  }
+
+  /* 
   if (key === "w") {
     connection.write("Move: up"); // connection object can be used here because it is in global scope
   }
@@ -30,17 +52,17 @@ const handleUserInput = function (key) {
 
   if (key === "d") {
     connection.write("Move: right");
-  }
+  } */
 
-  if (key === "l") {
-    connection.write("Say: LOL");
-  }
-  if (key === "g") {
-    connection.write("Say: Gotcha!");
-  }
-  if (key === "n") {
-    connection.write("Say: Noooo!");
-  }
+  // if (key === "l") {
+  //   connection.write("Say: LOL");
+  // }
+  // if (key === "g") {
+  //   connection.write("Say: Gotcha!");
+  // }
+  // if (key === "n") {
+  //   connection.write("Say: Noooo!");
+  // }
 
   // if user presses CTRL + C, then the program terminates
   if (key === "\u0003") {
