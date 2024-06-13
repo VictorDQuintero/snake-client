@@ -17,57 +17,15 @@ const setupInput = function (conn) {
 
 const handleUserInput = function (key) {
   // code handling the key presses
-
-  // for (const mover in MOVE_KEYS) {
-  //   if (key === MOVE_KEYS[mover][0]) {
-  //     connection.write(MOVE_KEYS[mover][1]);
-  //     break;
-  //   }
-  // }
-
-  // for (const mover in MOVE_KEYS) {
-  //   if (key === MOVE_KEYS[mover].letter) {
-  //     connection.write(MOVE_KEYS[mover].command);
-  //   }
-  // }
-  connection.write(MOVE_KEYS[key]);
-
-  for (const talker in MESSAGES) {
-    if (key === MESSAGES[talker].letter) {
-      connection.write(MESSAGES[talker].message);
-    }
-  }
-
-  /* 
-  if (key === "w") {
-    connection.write("Move: up"); // connection object can be used here because it is in global scope
-  }
-  if (key === "a") {
-    connection.write("Move: left");
-  }
-
-  if (key === "s") {
-    connection.write("Move: down");
-  }
-
-  if (key === "d") {
-    connection.write("Move: right");
-  } */
-
-  // if (key === "l") {
-  //   connection.write("Say: LOL");
-  // }
-  // if (key === "g") {
-  //   connection.write("Say: Gotcha!");
-  // }
-  // if (key === "n") {
-  //   connection.write("Say: Noooo!");
-  // }
-
-  // if user presses CTRL + C, then the program terminates
   if (key === "\u0003") {
     console.log("Exiting Game...");
     process.exit();
+  }
+  //explicitly state if conditions so that if by mistake user hits a key not present in either objects the program won't crash
+  if (MOVE_KEYS[key]) {
+    connection.write(MOVE_KEYS[key]);
+  } else if (MESSAGES[key]) {
+    connection.write(MESSAGES[key]);
   }
 };
 
